@@ -1,0 +1,95 @@
+
+
+
+
+
+MRP
+QAD EE 2016
+
+
+
+Table of Contents
+Objective	3
+Running MRP 23.1, 23.2, 23.3	3
+Regenerate Materials Plan 23.2	3
+Selective Materials Plan 23.3	4
+Net Change Materials Plan 23.1	5
+MRP Summary Inquiry 23.13	6
+MRP Detail inquiry 23.16	6
+MRP Detail Report 23.17	7
+
+
+
+
+
+Objective
+
+The objective of this document is to explain the process of maintaining basic item data including: inventory data, item planning data and running item audit reports. 
+Running MRP 23.1, 23.2, 23.3
+
+These programs should be viewed in Terminal mode to ensure proper functioning.
+To do this right click on the name of the program under applications and select properties. A window will appear, select program at the top and then open with Terminal
+
+
+Also: MAKE SURE THAT ANOTHER MRP SESSION IS NOT STARTED FOR THE SAME DATA WHEN THERE IS ALREADY AN MRP RUNNING
+Regenerate Materials Plan 23.2
+
+In 23.2, we generate the MRP for one entire site, or we can select a range of sites.
+
+Selective Materials Plan 23.3
+In 23.3, we generate the MRP for one part, or we can select a range of parts.
+Required Items Only:
+Defaults with "YES" (box checked)
+Specifies whether to include only items flagged for re-planning.
+Items flagged for re-planning are identified as "MRP Required" = Yes. 
+An item is flagged by the system for re-planning whenever a change is made affecting order timing or quantity, including changes to the planning data, inventory balance, etc for the item.
+ 
+Box checked: include only items flagged for re-planning. 
+Box unchecked: include all selected items.
+
+When re-planning a specific Item, it is always safer to uncheck this box. This way you are sure it will be re-calculated by the system.
+
+In most plants MRP is run during a Batch Process in the background.
+Below is screenshot during the MRP process. You can see the no. of items processed, the time mrp is already running, the part where it is calculating, etc.
+Net Change Materials Plan 23.1
+
+23.1 is rarely used, hence being in third position here. It only updates items with a net change (flagged items, as in 23.3 'required items only'.
+
+
+MRP Summary Inquiry 23.13
+
+This menu can be used to view requirements for a specific part.
+Details can be viewed in daily or weekly quantities and starting from a specific date.
+
+Gross Reqs: 		Total requirements for this day
+Sched Receipts: 	All the FIRM Orders
+Projected QOH: 	System calculated QOH
+Plan Ords Due: 		System Calculated Orders required/due
+Plan Ords Rel:		System Calculated Orders to be released
+
+
+MRP Detail Inquiry 23.16
+
+This report shows details of Work Orders for a specific item as well as Firm (under Sched Rcpt) and Planned (under Plan Ords) order quantities.
+
+
+
+
+MRP Detail Report 23.17
+
+Similar to 23.16 but with more details, this report can be used to see all requirements for an item, each separate Work Order (for example demand for each FG) is listed. It also shows planned deliveries of the item. Firm orders would be shown under scheduled receipts. This can be very useful when investigating anomalies in the order quantities.
+
+At the top of the created report the base data from 1.4.7 is shown:
+
+
+
+
+SCM QAD training documentMRP Page 8 of 8
+
+
+
+
+
+
+
+

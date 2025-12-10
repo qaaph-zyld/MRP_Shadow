@@ -1,0 +1,65 @@
+
+
+
+
+
+
+Diamond Report NEW
+QAD EE 2016
+
+
+
+Table of Contents
+Objective	3
+Process Steps	3
+Select Customer or Supplier Schedule	3
+Report Selections	3
+Deselect Releases:	4
+Emailing of the report:	4
+Ready report in Excel in the mail box:	5
+
+
+
+
+
+Objective
+
+The objective of this document is to explain the process of using 7.5.7 *Customer & Supplier Diamond Report in QAD EE16
+Process Steps
+Select Customer or Supplier Schedule
+In this field input either S (for supplier) or C (for Customer)
+
+Then you will be able to input Customer or supplier ID in the relevant field:
+
+
+Report Selections
+In the table you will be able to see all the SO or PO for this Customer or Supplier. Choose one in selection field:
+
+
+Important selections:
+- Release Date: time frame when release was created 
+- Demand date : time frame for which demand is displayed
+- Disp Quantities: if you want to see net (REQ) or cumulative (CUM) qty's in your report.
+Deselect Releases:
+
+You have an option to deselect releases from the diamond. It is useful if you are getting release on daily basis and want to select only one release per week
+Use Enter button to deselect releases from the output. Deselected releases are marked with star *:
+
+Exit this screen with F4 when finished.
+
+Emailing of the report:
+
+Verify that you saw this message at the end of the selection
+
+
+
+
+
+
+
+Ready report in Excel in the mail box:
+
+
+SCM QAD training documentDiamond ReportPage 5 of 5
+
+

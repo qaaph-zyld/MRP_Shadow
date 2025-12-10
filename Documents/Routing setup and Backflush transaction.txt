@@ -1,0 +1,103 @@
+
+
+
+
+Routing and backflush setup
+QAD EE 2016
+
+
+
+Table of Contents
+Objective	3
+Process Steps	3
+Employee Create/ Employee Modify: 36.1.7.1 / 36.1.7.2	3
+Department Maintenance: 14.1	4
+Work Center Maintenance: 14.5	4
+Standard Operation Maintenance: 14.9	5
+Routing Maintenance: 14.13.1	6
+Item Planning Maintenance: 1.4.7/ 1.4.17 for multi-site - IMPORTANT	6
+Production line maintenance: 18.22.1.1 - IMPORTANT	7
+Manual backflush transaction: 18.22.13	8
+
+
+
+
+
+Objective
+
+In order to successfully complete backflush transaction several setup steps need to be made.
+
+Process Steps
+
+To perform backflush it is required to create Employee and Department. 
+Employee Create/ Employee Modify: 36.1.7.1 / 36.1.7.2
+
+Here it is enough to create only one employee. No other fields are required to be filled.
+Should be created already by G2 team
+
+
+
+
+
+Department Maintenance: 14.1
+Here it is enough to create one department for BF only. No other fields are required to be filled.
+Should be created already by G2 team
+
+
+
+Work Center Maintenance: 14.5
+
+For backflush separate work center has to be created: BK
+To this work center you need to link previously created Department (14.1) 
+Should be created already by G2 team
+
+
+
+Standard Operation Maintenance: 14.9
+
+One standard operation must be created in the system with code 999.
+It must me setup as 100% Yield Percentage and checked as Milestone Operation.
+Also previously created Work Center has to be linked to 999 operation 
+Should be created already by G2 team
+
+Routing Maintenance: 14.13.1
+
+When creating default routing following data should be setup:
+- Standard Operation should be assigned
+- Work Center should be assigned
+- Milestone Operation should be checked
+- Yield Percent should be set 100%
+Should be created already by G2 team
+
+Item Planning Maintenance: 1.4.7/ 1.4.17 for multi-site - IMPORTANT
+
+The most important parameters here to setup are: 
+- Routing Code (NEW Requirement) - must be assigned to each part that is being produced.
+
+
+Production line maintenance: 18.22.1.1 - IMPORTANT
+All manufactured parts must be assigned to production line via 18.22.1.1 program.
+
+
+
+
+
+Manual backflush transaction: 18.22.13
+
+When you do manual backflush in QAD EE 2016 following data must be entered:
+- Employee: created on previous step
+- Site: choose relevant site for this part
+- Item number: Item that you want to backflush
+- Standard operation: created on previous step
+- Routing code (default): created on previous step
+- Location (default): location to which manufactured part will be received
+- Work center (default): created on previous step
+- Qty processed: how many pieces you want to backflush
+
+
+
+SCM QAD training documentRouting setup and backflush Page 8 of 8
+
+
+
+

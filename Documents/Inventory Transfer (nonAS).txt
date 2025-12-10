@@ -1,0 +1,73 @@
+
+
+
+
+G2 EE
+Inventory transfer (non AS)
+
+
+
+
+
+
+QAD EE Training Document
+Inventory Transfer (non AS)
+
+
+
+
+
+
+
+
+Table of Contents
+Objective	3
+*Transfer - Single Item 3.4.1	3
+Transfer - Multi Item 3.4.2	4
+
+
+
+
+
+Objective
+The purpose of this document is to explain inventory transfers in QAD not involving the AS warehouse management system.
+*Transfer - Single Item 3.4.1
+This program can be used when one item is to be transferred between locations.
+The overall quantities in the system are not changed.
+Enter the data for the part to be transferred, the quantity and the from and to locations:
+
+
+If the status of the two locations is different then you will be asked if you want to take the status of the 'to' location. Click Yes.
+
+
+You will be asked if all information is correct. Click Yes.
+
+To check the transferred quantities etc. you can use various reports, for example 3.21.2
+
+Scroll further right for further information, such as the user who performed the transaction.
+
+Transfer - Multi Item 3.4.2
+This program can be used to transfer multiple items between locations. Typically it is used to empty a location onto another location. If not all parts on a particular location are to be transferred it is better to use a CIM load. This avoids parts being transferred by mistake.
+The overall quantities in the system are not changed.
+Enter the data for the transfer. If the status of the two locations is different then you must select the check box or no transfer will be made.
+
+Once the data is complete click next and a report will automatically be generated showing the parts transferred.
+
+
+
+
+You can use the Inventory Detail by Item Browse 75.7.2.12 to check the inventory on the location before and after the transfer.
+Before:
+
+After:
+
+
+QAD G2 TRAINING DOCUMENTInventory Transfer (non AS)Page 2 of 6
+
+
+
+
+
+
+
+

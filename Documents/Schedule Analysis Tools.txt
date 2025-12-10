@@ -1,0 +1,153 @@
+
+
+
+
+Schedule Analysis Tools
+QAD EE 2016
+
+
+
+Table of Contents
+Objective	3
+*Schedule Analysis Tool 7.5.21.7	3
+Export and pick-up of file to be imported in MS Excel	4
+Working in Excel	4
+Content of the excel export file	4
+Using Pivot table for analysis	5
+Important additional information	6
+*Diamond Report 5.5.5.24.1	8
+*Cust. Ship/Plan Sched. Var. Browse 7.5.21.24.8 and 9	12
+
+
+
+
+
+Objective
+
+This document explains various tools for comparing and analysing customer and supplier data in QAD 2016 EE.
+
+*Schedule Analysis Tool 7.5.21.7 
+
+The tool can be found in QAD in menu 7.5.21.7 Schedule Tools. 
+If not fill in the name 'jcschan1.p' into the search field.
+
+You will get the 'Schedule Analysis Tool' menu screen where you can enter the selection criteria (see next picture)
+
+
+Fields in the program:
+* "Cumulate Items per Group/Item" 'G' or 'I'. You can select either on group or item. You can setup groups in 1.4.3 menu
+* "Item Number" The range of items when the previous field is selected on 'I'.
+* "Group" The name of the group you want to select when the first field name is on 'G'.
+* "Sales Order" The range of the Sales Orders you want to select
+* "Purchase Order" The range of the purchase orders if you want to select this.
+* "Customer" Customers number range if you want to select this.
+* "Supplier" Suppliers number range if you want to select this.
+* "Schedule Data" A time period selecting the scheduled quantities.
+* "Create date" Range of dates in which the schedules are created.
+* "Schedule Type" Sometimes there are three types of customer schedules:
+* 1: long term data
+* 2: short term data
+* 3: a combination of 1 and 2
+For supplier schedules leave the field as default. The export will work anyway
+* "Cumulate Day/Week" Choose to see weekly or daily data
+* "Available" Shows only stock qtys that are available. This has been set up for all active items.
+* "Nettable" Shows only nettable stock. Typically leave this box and the available box checked.
+* "Filename" The name of the file you will create.
+
+Export and pick-up of file to be imported in MS Excel
+After the execution of the program the information was exported in a file that you can copy from the server on your local drive. Use WIN SCP or similar to do this from your plant's home directory.
+Open the file using Excel.
+
+Working in Excel
+
+Content of the excel export file
+In the file imported you can find the following information:
+* Column 1 "Interval" Time interval. You will see a 'W' for Weeks and 'M' for Months.
+* Column 2 "Item" Selected Group or Item
+* Column 3/4 "Creation_week Year" Week/year when the schedule has been created. 
+* Column 5 "Schedule_type" 1,2,3 of 4. For explanation see above. 
+* Column 6 "Sender" Site/Supplier number. The customer-schedule-receiving site (type 1-3) or the supplier to whom the schedule has been sent
+* Column 7/8 "Forecast_week Year" Week/year for which the forecast is meant.
+* Column 9 "Qty_on_stock_1" Stock at this moment
+* Column 10 "Qty_on_stock_1_um" Item's original unit of measure
+* Column 11 "Forecast_qty_1" Quantity that will be requested for a particular week.
+* Column 12 "Forecast_qty_1_um" Unit of measure.
+* Column 13 "Qty_on_stock_2" Stock at this moment in alternative unit of measure (e.g. carset)
+* Column 14 "Qty_on_stock_2_um" Alternative unit of measure
+* Column 15 "Forecast_qty_2" Quantity requested (alternative unit of measure)
+* Column 16 "Forecast_qty_2_um" Alternative unit of measure
+* Column 17 "CUMs" Real demand/shipments up to now
+* Colum 18 "Forecast CUMs" 
+
+
+Using Pivot table for analysis
+By using the Pivot table function in Excel you can make an analysis of these data (you can find the Pivot table function in the 'Data' tab). This tool enables you to make reports according to your needs from the raw data you see below. This can be used for finding out what claims can be made towards out customer and what our suppliers can claim to us.
+
+
+
+By dragging the field buttons to the column and row you can construct you own Matrix. 
+
+For example: when you want to have an overview from the forecasted cumulative figures drag the following items to the page: Interval (weekly or monthly), Item, Creation_week, Forecast_week and Cum_qty. See the following picture how to do this.
+
+Important additional information
+
+With the item 'Forecast_week' there is sometimes the monthly forecast mentioned as well. You can check this by looking at the column 'Interval' where 'W' of weekly or 'M' of monthly is described.
+
+
+
+You can do exactly the same when you want to have an overview of individual orders made. Just replace Cum_qty with Forecast_qty_1.
+
+
+From these matrixes you can make graphs in which deviations in planning for a particular item or a whole group. 
+You can add additional filters for better analysis of the data (year, sender):
+
+
+
+These data can be used for negotiating purposes and analysis. You can compare the planning from your customer with your planning after an MRP-run towards your suppliers to find out what influence the settings of your QAD system have on the demand further down the Supply Chain.
+
+*Diamond Report 5.5.5.24.1
+
+This program only works in terminal mode. To change to Terminal right click on the program and select properties:
+
+
+Under program then select Terminal.
+
+Now you can open the program.
+There is various data which must be selected to run the report:
+Customer/Supplier:	Enter Cust to compare customer data and Supp to compare Supplier data.
+Cust..:			Enter customer numbet
+Supp:			Enter supplier number
+Selection:	Next to the numbers 1, 2, 3 etc. the open SO or SA will be displayed. You can also see the total, active and inactive lines. Select the correct one and enter the corresponding number
+Init Weekly day Opts on	Enter the number of the day the data starts on. This will typically by 2=Monday
+Start Date:		Enter the start data from when you want to review the releases
+Active/All:		Select if you only want to see active SO/SA lines or all
+Prod Line:		Select a Product Line or range of Product Lines, if required
+Item number:		Select an item number or range of item numbers, if required
+Weeks ahead:	The number of weeks of requirements that will be compared from the given date
+Weeks Analysis:	The number of weeks of customer / supplier releases that will be offered for selection in the next window
+Net/Cumms	Enter Net to see net quantities require in the releases, enter Cumms to see cumulatives.
+Enter all this data as required:
+
+You will then be shown a list of the customer or supplier releases for the given period.
+If you want to compare all data from all releases select nothing and press F4. If you want to exclude certain releases use the cursor keys to move to those releases and press enter. A star will appear next to that release. Once a star is shown next to all releases you want to exclude press F4.
+
+You will return to the previous page. Enter a name of your choice under output and confirm.
+You can then export the created file using the WIN SCP (or similar) tool.
+Then open the file using Excel. Select Fixed width:
+
+Click next. Then you need to click where the columns should be
+
+Click next and finish and you can see the data set out in diamond form making it easy to identify changes in customer demand:
+
+
+*Cust. Ship/Plan Sched. Var. Browse 7.5.21.24.8 and 9
+
+These browses compare the current customer release to the last 6 releases. 7.5.21.24.8 is for short-term ship schedule data (also seen in 7.5.1) and 7.5.21.24.9 is for long-term plan schedule data (also seen in 7.5.2) 
+Use the filters at the top of the screen to select which customer, items etc. you require and the data will be shown.
+
+
+Use Actions and Export to Excel at the top of the screen to work with the data in Excel.
+
+SCM QAD training documentSchedule Analysis ToolsPage 13 of 13
+
+

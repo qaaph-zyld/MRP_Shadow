@@ -1,0 +1,145 @@
+
+
+
+
+G2 EE
+Shipping and Customer Returns
+
+
+
+
+
+
+QAD EE Training Document
+Shipping and Customer Returns
+
+
+
+
+
+
+
+
+Table of Contents
+Objective	3
+*Pre-Shipper/Shipper Workbench 7.9.2	3
+*Shipment Check Report 7.9.16.1	8
+*Shipper Report 7.9.16.2	9
+*Pre-Shipper/Shipper Confirm 7.9.5	10
+*Pre-Shipper/Shipper Print 7.9.4	11
+*Picklist/Pre-Shipper-Automatic 7.9.1	13
+*Shipment ASN Export 35.4.1	13
+Customer Returns	15
+
+
+
+
+
+Objective
+Purpose of this document is to explain the manual shipping process
+Shipping is typically performed with the automatic backflush using JTDS. This process is for exceptional shipping processes. 
+Make sure you have enough FGs available in the system to ship as required. FGs can be created manually using Manual backflush transaction: 18.22.13, see instruction "Routing Setup and Backflush". 
+*Pre-Shipper/Shipper Workbench 7.9.2
+This program is used to create a Pre-Shipper or Shipper which can then be shipped.
+Enter the Ship-From ID, choose Shipper or Pre-Shipper and enter the Ship-To.
+If Number is left empty a (Pre-)Shipper ID will be created automatically. Click Next.
+The next fields can be left blank.
+
+In the next field carrier and vehicle information can be entered which will be displayed on the shipper. You must enter a Mode of Transport. Click the magnifying glass to select from those available.
+It is also possible to merge this shipper with another Pre-Shipper if required. Select this box if you want to do this and select the required shipper.
+
+If merging with another shipper:
+ 
+ASN data can be entered as required or left empty. Click Next.
+
+On the next screen the items to be shipped are added. Click Actions at the top of the screen and select Insert.
+
+You will then be given these four options:
+
+Add as required. By selecting 1, for example, you will be able to enter the details of the item to be shipped:
+
+Click Next to enter quantity and then Next again to confirm:
+
+At the top of the screen the added items will be displayed
+
+
+If you need to delete an item select Delete at the bottom of the screen
+
+You will then have the option of what is to be deleted.
+
+Once all quantities are correct click Back and you will see this screen
+
+Click back again and you will be given further options for this (Pre-)Shipper concerning printing
+
+Click back again and you will return to the starting point and you will see the Shipper number created if this field was left empty.
+
+*Shipment Check Report 7.9.16.1
+This report can be used to verify the status of a Pre-Shipper or Shipper.
+Select, for example, today's date
+
+A report will be generated showing the shippers created on that day and their status:
+
+To export to Excel:
+By entering an output name when creating the report it will then be available in the plant's home directory to be transferred using the local file transfer tool (typically WIN SCP) and then opened in Excel.
+*Shipper Report 7.9.16.2
+This report will show details of Shippers including part numbers, but not for Pre-Shippers.
+Enter the data as required and a report will be created. You can select to only see confirmed or unconfirmed shippers
+ 
+A report will be generated with the requested information 
+
+To export to Excel:
+By entering an output name when creating the report it will then be available in the plant's home directory to be transferred using the local file transfer tool (typically WIN SCP) and then opened in Excel.
+*Pre-Shipper/Shipper Confirm 7.9.5
+This program is used to confirm a Pre-Shipper or Shipper.
+Select the Pre-Shipper or Shipper prepared in 7.5.2. (click on the magnifying glass to see the available shippers).
+
+Enter/confirm the ship date and effective date.
+
+Enter further details if required, if not click Next.
+
+If you entered a Pre-Shipper number here you will be informed of the Shipper number
+
+Leave the default settings in the next field
+
+By clicking Next you will be asked if all the information is correct
+
+Click Yes and you will confirm the shipper and return to the starting point. A Pre-Shipper will have been converted into a Shipper, you will see the Shipper num ber here
+
+
+*Pre-Shipper/Shipper Print 7.9.4
+This program can be used to print Per-Shippers or Shippers.
+Select the options as required, including whether already printed shippers should be printed again.
+
+
+The Shipper will be printed as required
+
+You will be asked if everything has printed correctly.
+If you print a Pre-Shipper you will be asked if you want to assign a Shipper number. By selecting Yes your Pre-Shipper will be converted to a Shipper and a Shipper number will be assigned.
+*Picklist/Pre-Shipper-Automatic 7.9.1
+This program is used where a customer schedule is available in 7.5.2. In this case the standard procedure is automatic backflush using JTDS so this menu is typically not used. 
+*Shipment ASN Export 35.4.1
+This menu can be used for sending ASNs to the customer.
+EDI parameters must be set up previously by IT.
+Enter the data relating to the shipper and click next.
+Enter a printer to get a physical print out or a name for a file to be created in your plant's home drive.
+
+The print out or created file will show the data of the ASN transfer.
+
+Customer Returns
+The customer returns process is similar to the shipping process but the quantities are negative.
+Create a shipper as above in 7.9.2 with negative quantities.
+
+Confirm this shipper using 7.9.5, print using 7.9.4 etc. as above.
+The parts will be produced onto the location that they were created from (typically FG). Check using, for example, Inventory Detail by Item Browse 75.7.2.12.
+In order to scrap the FGs a negative backflush must be performed to convert the FGs back into their component parts. Usable parts can be reused and the rest must be scrapped.
+
+
+QAD G2 TRAINING DOCUMENTShipping and Customer ReturnsPage 14 of 15
+
+
+
+
+
+
+
+

@@ -1,0 +1,112 @@
+WITH 
+  PartDetails AS (
+    SELECT 
+      COALESCE(pt.pt_part, sd.sct_part) AS pt_part,
+      pt.pt_desc1, pt.pt_desc2, pt.pt_prod_line, 
+      pt.pt_status, pt.pt_loc, pt.pt_buyer, 
+      pt.pt_routing, pt.pt_net_wt, pt.pt_net_wt_um, 
+      pt.pt_site, pt.pt__chr02, pt.pt_dsgn_grp,
+      sd.sct_cst_tot,
+      sd.sct_cst_date,
+      sd.sct_site,
+      (sd.sct_lbr_tl + sd.sct_bdn_tl + sd.sct_ovh_tl + sd.sct_lbr_ll + sd.sct_bdn_ll + sd.sct_ovh_ll) AS LBO,
+      (sd.sct_mtl_tl + sd.sct_mtl_ll) AS MaterialCost
+    FROM 
+      [QADEE2798].[dbo].[pt_mstr] pt
+    LEFT JOIN 
+      [QADEE2798].[dbo].[sct_det] sd 
+      ON pt.pt_part = sd.sct_part AND sd.sct_sim = 'Standard'
+    WHERE 
+      pt.pt_part_type NOT IN ('xc', 'rc')
+  ),
+  PodDetails AS (
+    SELECT 
+      pd.pod_nbr, pd.pod_line, pd.pod_part, 
+      pd.pod__chr08, pd.pod_ord_mult, 
+      pd.pod_translt_days, pd.pod_sd_pat, 
+      pd.pod_sftylt_days, pm.po_vend
+    FROM 
+      [QADEE2798].[dbo].[pod_det] pd
+    INNER JOIN 
+      [QADEE2798].[dbo].[po_mstr] pm 
+      ON pd.pod_nbr = pm.po_nbr
+    WHERE 
+      pd.[pod_end_eff[1]]] = '2049-12-31 00:00:00'
+  ),
+  SalesOrderDetails AS (
+    SELECT 
+      sm.so_nbr, sm.so_ship, 
+      sd.sod_line, sd.sod_part, 
+      sd.sod_qty_all, sd.sod_qty_pick, 
+      sd.sod_qty_ship, sd.sod_qty_inv, 
+      sd.sod_status, sd.sod_site, 
+      sd.sod_prodline, sd.sod_contr_id, 
+      sd.[sod_cum_qty[1]]],
+      sd.[sod_curr_rlse_id[1]]],
+      sd.[sod_end_eff[1]]],
+      sd.[sod__qadd04],
+      sd.sod_unadjust_cum_qty
+    FROM 
+      [QADEE2798].[dbo].[so_mstr] sm
+    LEFT JOIN 
+      [QADEE2798].[dbo].[sod_det] sd 
+      ON sm.so_nbr = sd.sod_nbr
+  ),
+  Inventory AS (
+    SELECT 
+      in_part, in_iss_date, 
+      in_rec_date, in_cnt_date
+    FROM 
+      [QADEE2798].[dbo].[15]
+  ),
+  LdDetXxwezoned AS (
+    SELECT 
+      ld.[ld_part],
+      xz.[xxwezoned_site],
+      SUM(CASE WHEN xz.[xxwezoned_area_id] = 'WIP' THEN ld.[ld_qty_oh] ELSE 0 END) AS WIP_Qty,
+      SUM(CASE WHEN xz.[xxwezoned_area_id] = 'WH' THEN ld.[ld_qty_oh] ELSE 0 END) AS WH_Qty,
+      SUM(CASE WHEN xz.[xxwezoned_area_id] = 'EXLPICK' THEN ld.[ld_qty_oh] ELSE 0 END) AS EXLPICK_Qty
+    FROM 
+      [QADEE2798].[dbo].[ld_det] ld
+    LEFT OUTER JOIN 
+      [QADEE2798].[dbo].[xxwezoned_det] xz 
+      ON ld.[ld_loc] = xz.[xxwezoned_loc]
+    GROUP BY 
+      ld.[ld_part],
+      xz.[xxwezoned_site]
+  ),
+  MainQuery AS (
+    SELECT 
+      pd.*, 
+      pt.*, 
+      sod.*, 
+      i.*
+    FROM 
+      PartDetails pt
+      LEFT JOIN PodDetails pd ON pd.pod_part = pt.pt_part
+      LEFT JOIN SalesOrderDetails sod ON sod.sod_part = pt.pt_part
+      LEFT JOIN Inventory i ON i.in_part = pt.pt_part
+  ),
+  SerialQuery AS (
+    SELECT 
+      a.[ser_part],
+      b.[xxwezoned_area_id],
+      COUNT(a.[ser_serial_id]) AS Serial_Count,
+      SUM(a.[ser_qty_avail]) AS Total_Qty_Avail
+    FROM 
+      [QADEE2798].[dbo].[ser_active_picked] a
+    LEFT JOIN 
+      [QADEE2798].[dbo].[xxwezoned_det] b ON a.[ser_loc] = b.[xxwezoned_loc]
+    GROUP BY 
+      a.[ser_part], 
+      b.[xxwezoned_area_id]
+  )
+SELECT 
+  mq.*,
+  sq.[ser_part] AS Serial_Part,
+  sq.[xxwezoned_area_id] AS Serial_Area_ID,
+  sq.Serial_Count,
+  sq.Total_Qty_Avail
+FROM 
+  MainQuery mq
+  LEFT JOIN SerialQuery sq ON mq.pt_part = sq.ser_part

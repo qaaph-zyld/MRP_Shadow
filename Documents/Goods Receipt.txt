@@ -1,0 +1,162 @@
+
+
+
+
+G2 EE
+Goods Receipt
+
+
+
+
+
+
+QAD EE Training Document
+Good Receipts
+
+
+
+
+
+
+
+
+Table of Contents
+Objective	3
+Checking for received ASNs	3
+PO Shipper Browse 1.15.40.4	3
+PO Shipper Unconfirmed Report 5.5.5.8	3
+PO Shipper/Container Inquiry 5.5.5.6	4
+PO Shipper Receipt 5.5.5.11	6
+Schedule Receipt Browse 5.5.5.16	7
+Creating a Shipper when no ASN was received	8
+PO Shipper Maintenance 5.5.5.5	8
+PO Shipper Delete/Archive 5.5.5.23	9
+Delivery Discrepancies	10
+DMR Receipt 5.5.6.1 - Vendor fault	10
+DMR Receipt 5.5.6.1 - Internal Adient errors	12
+
+
+
+
+
+Objective
+Purpose of this document is to explain the Goods Receipt process
+Checking for received ASNs
+PO Shipper Browse 1.15.40.4
+
+This Browse can be used to set up a standard search for the ASNs available in the system
+In the Search Status equals Unconfirmed and then the Ship-From ID should be changed to the supplier for which an ASN should be available
+
+PO Shipper Unconfirmed Report 5.5.5.8
+Another option for viewing ASNs is to use the PO Shipper Unconfirmed Report
+
+Enter the supplier number and click next to produce a report
+
+
+
+PO Shipper/Container Inquiry 5.5.5.6
+
+To view the details of a specific ASN the program 5.5.5.6 can be used but the list of shippers shown is not limited to unconfirmed shippers. It also shows data for containers which have been received in the system. It is therefore necessary to use one of the reports above (or data from a received invoice) to select the required DN to view.
+
+
+If the magnifying glass search function is selected for the Shipper/Container ID a list will be displayed. 'C' refers to a container and 'S' to a Shipper.
+
+
+
+
+Having selected the correct ASN a report will be created showing the contents of the ASN (or confirmed shipper):
+
+
+PO Shipper Receipt 5.5.5.11
+
+This program is used to confirm Shippers. However, the contents of the Shipper is not displayed - the shipper number can be selected from the list
+
+The effective date can then be changed (as per Adient standards it is not possible to confirm a Shipper with a date not in the current calendar month).
+
+A warning message about an overshipment or similar may be displayed.
+
+The system will then request confirmation of the update (receipt of goods)
+
+By confirming the transaction is complete and can be seen in 3.21.2
+
+Schedule Receipt Browse 5.5.5.16
+
+To verify the quantities received the Browse 5.5.5.16 can be used.
+
+By searching for receipts from a specific supplier for a specific day the relevant data can be found
+
+Further search criteria can be used as required.
+
+Creating a Shipper when no ASN was received
+PO Shipper Maintenance 5.5.5.5
+Entering an ASN manually when no ASN has been received from Supplier
+Enter the supplier number and Shipper ID. Click next. Confirm the site. Click next twice. Adjust the ship and due date as required.
+
+
+By clicking next the system will request a container ID. To skip this optional entry click Back.
+
+Next enter the part number to be received. Use the cursor keys up/down to scroll through to the correct PO.
+
+
+
+Click Next to enter the receipt quantity. Make sure the parts are being booked to the correct location.
+
+Click Next. A warning message will appear for any overshipment etc.
+You will return to the Item Number field. Repeat the process for all items on the Shipper.
+Once completed click back to exit this shipper.
+This process simply creates the ASN, it doesn't confirm it. The shipper can be viewed in the unconfirmed shipper reports/browses listed above and confirmed under 5.5.5.11.
+
+PO Shipper Delete/Archive 5.5.5.23
+
+Should it be necessary to delete an ASN from a supplier the program 5.5.5.23 can be used.
+Enter the correct supplier and Shipper ID. Make sure that confirmed shipper is always unchecked and unconfirmed shipper checked. It is not permitted to delete a confirmed shipper.
+
+Use either 1.15.40.4 or 5.5.5.8 to verify that the shipper has been deleted as required.
+Delivery Discrepancies
+
+The ASN from a supplier must always be received in the system as sent by the supplier. Any discrepancies arising from that shipment (quantity differences between ASN and delivery, wrong contents, differences between Shipper and ASN quantities, among others) must be reported the supplier using the Adient IRIS tool and corrected in QAD using the DMR process.
+
+DMR Receipt 5.5.6.1 - Vendor fault
+
+Vendor fault resulting in a DMR in the online IRIS tool (due to: shipment discrepancies shipper to received quantity, damaged goods received, wrong contents and many more) where a correction in system quantities is required should use this menu.
+First the supplier number is entered:
+
+Then a field will appear requesting the original packing slip number
+
+Next the system will ask if the vendor caused this DMR
+
+In this instance (vendor fault) a DMR must be created in IRIS prior to entering the quantities in the system. The number from that DMR must then be used for this booking in QAD e.g. DMR-17001234 (max. 16 characters).
+
+Enter the part number and scroll up and down so that the correct PO and line number are shown below. When adding further part numbers make sure you scroll to correct the PO line.
+
+Click Next and enter the adjustment quantity under quantity - so if the original ASN said 20 parts were received but only 10 were received -10 must be entered here (total received: 10). If 30 were received then +10 are booked.
+For plants using AS the automatic location for DMR bookings will be DISCREP. Please be careful to correct this location if you are booking parts found elsewhere, otherwise you risk missing the correction in your stocks and a production shortage.
+Once all quantities, positive and negative, for this DMR have been entered then click back. The system will ask if you want to see the overview of qtys. Click yes to get the overview:
+  
+Check the location is correct.
+If all quantities and the location are correct, click next and you will be asked if all information is correct
+
+By confirming the information is correct the next pop up will ask if the receiving should be confirmed.
+
+Unlike with shippers this menu is used for all steps of the process, confirming "yes" here will complete the transaction in the system. Clicking no will cancel it and return to the previous step.
+
+DMR Receipt 5.5.6.1 - Internal Adient errors
+
+Adient fault: Shipper confirmed in error, error in manual entry of quantities.
+
+Most steps here are the same as when the vendor is at fault. The Vendor Fault box must be unchecked.
+
+The shipper ID field should then be left empty and a DMR ID will be created automatically. Select yes.
+
+
+The remaining steps are the same as when the vendor is at fault above.
+
+The transaction can be viewed under 3.21.2. Under remarks the DMR number will be shown:
+
+There is no specific transaction for DMRs, it is simply a RCT-PO like a normal Shipper booking.
+As this is a financial transaction the data is transferred to SAP. 
+The cumulative quantities for the affected parts are adjusted based on the booked quantities - make sure your supplier adjusts their cums or there could be issues with future orders.
+
+QAD G2 TRAINING DOCUMENTGoods ReceiptPage 1 of 14
+
+

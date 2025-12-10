@@ -1,0 +1,269 @@
+
+
+
+
+G2 EE
+Alerts / Materials Management Tools
+
+
+
+
+
+
+QAD EE Training Document
+Alerts / Materials Management Tools
+
+
+
+
+
+
+
+
+Table of Contents
+Objective	3
+Stock and requirement control	3
+Action Message Browse 23.6	3
+Action Message Report 23.7	6
+Days On Hand Browse 96.3.5.3.21	6
+*Days of Supply Report 3.6.24.2	7
+*Expeditors Workbench 3.6.24.1	9
+MRP Summary Inquiry 23.13	11
+MRP Detail Inquiry 23.16	12
+*MRP Export 23.18	14
+Transportation Order Management	15
+*PUS Order Creation/*Full Truck Load 12.10	15
+*Export PUS (csv) 12.11	19
+
+
+
+
+
+Objective
+Purpose of this document is to explain the options in QAD for managing materials and receiving alerts on material shortfalls. The PUS upload for INET for LTL and groupage shipments will also be explained.
+Stock and requirement control
+Action Message Browse 23.6
+For multiple parts at once.
+This browse shows all parts with Alert Messages. Alert messages tell the user of issues relating to the supply of parts. Here is a list of all messages in QAD, afterwards you will find more detail on the two alerts primarily used by JIT plants:
+
+MessageMeaningBeginning Quantity Less than ZeroThe initial nettable quantity on hand is negativeBeginning Available Less than ZeroThe quantity on hand less safety stock is negativeCreateA supply order should be created to satisfy a negative projected on-hand balance. This message is only generated if Plan Orders id No or if a new requirement appears within the time fenceDe-ExpediteA scheduled supply order is due before it is needed and should be delayed or demand rescheduled to an earlier dateExpediteA scheduled supply order is due after it is needed and should be rescheduled to an earlier date, or demand rescheduled to a later dateCancelA scheduled supply order is no longer needed and should be deletedRelease due forA supply order should be released. You can release both planned and firm-planned orders.
+Use the Order Release Horizon field in MRP Control (23.24) to specify the number of days prior to the order release date for this action message to display.Release Past Due forA supply order was not released when it was due. It now needs to be released and expedited, or the demand must be rescheduled for a later date.Quantity less than minimumA supply order was created for a quantity less than the minimum quantity set in the item planning data.Quantity exceeds maximumA supply order was created for a quantity greater than the maximum set in the item planning dataPast DueScheduled supply order receipt is past the due dateTime Fence ConflictUnsatisfied material requirement exists inside the planning time fence for the item. MRP will not create planned orders within the time fence. You should either manually schedule and expedite orders to fill this demand or delay fulfillment of the requirement that created the demand.Shipment DueA shipment for an intersite request item is due. Action should be taken at the source site to ensure that the order is received on timeShipment Past DueA shipment for an intersite request item is past due. You should either delay the orders that crated the requirement for the item or expedite them with the item does arriveNo Source of SupplyA valid source network is not available for the date a DRP item is required. Either the item or item-site planning data does not reference a source network, or the source network is not effective on that date. Planned Order  Count Exceeds MaximumAn item/site combination generated the maximum number of planned orders. MRP currently cuts off the creation of orders for an item/site combination at 1000. Calculation for other items continues. This prevents runaway calculations caused by, for example, an incorrect item order quantity.
+In bold above you can see the two primary alert messages.
+Expedite
+Filter the data for a specific supplier or buyer and according to the message to be displayed.
+Here you can see the items with the Expedite message for a specific buyer.
+
+
+
+
+Based on this data the user can check if it is really necessary for the orders to be changed or if demand can still be met due to safety stock etc.
+
+
+
+
+
+
+To export the data to Excel click actions at the top of the screen and select Export to Excel.
+
+
+Click add to favourites and this alert can be added to your favourites to get an update as quickly as possible.
+
+If you want this browse to start automatically when you log in then right click and select Auto Start:
+
+
+
+
+Action Message Report 23.7
+For multiple parts at once.
+The details from the browse above can also be displayed in a report.
+Enter the relevant data (use the magnifying glass to see the list of Action Code) and select the Output PAGE to see a report in QAD or enter a name to export the data using WINSCP or a similar tool.
+
+
+
+
+
+
+Days On Hand Browse 96.3.5.3.21
+For multiple parts at one time.
+This tool can be useful to see where there could be a supply issue.
+Use the filters at the top of the screen to select what information you want to see (particular supplier, buyer, number of DOH)
+
+
+As with the Action Message Browse above you can add this to your favourites to get an update whenever you want.
+
+*Days of Supply Report 3.6.24.2
+For multiple parts at once.
+This report can be useful as data can be exported based on various parameters
+
+
+
+
+The following options are important in this report:
+
+1st/2nd Location	If stock quantities should be taken from specific locations enter them here. Otherwise all Nettable quantities will be used for the calculation.
+Include Safety: if this box is checked real available stocks will be taken. When not checked the coverage will be calculated based on current stock minus the safety stock set up in 1.4.7.
+Print to File: Select this and enter a file name to have the data in a csv file which can then be exported onto your PC and opened in Excel.
+Report Daily: Check this box to see daily requirements, otherwise data will be shown in weekly buckets.
+Range: enter the desired range here. If you enter 0 to five all items with between 0 and 5 days of stock will be shown. Items with, for example, 6 days will not be shown. To be shown in a report/on screen the maximum output is 8. Output to File max. is 49.
+Show all in Range: If you only want to see parts not in the range you have entered uncheck this box and check Show out of Range.
+Show Out of Range: by checking this box the report will show you parts out of the range selected on the left. This could mean all parts are shown (if you select show all in range as well) or just those out of range if just this box is checked.
+WOS Calc. Type: This is an important setting. There are 3 options: 
+1) Only MRP 			- no deliveries taken into account
+2) Add Schedules to MRP	- all schedule quantities shown are takin into account
+3) Add ASNs to MRP		- Quantities for ASNs available in the system are taken into account
+To use options 2 or 3 you must be sure that your schedules will be fulfilled / that the ASN dates are reliable or you will calculate based on wrong data.
+
+Once you have selected all the options you require a report will be generated or a file exported into your plant's home directory.
+Here is an example of the report:
+
+
+
+
+*Expeditors Workbench 3.6.24.1
+For one part at a time.
+This menu lets the user view the requirements but also modify them based on the data, changing the order quantities for suppliers. This tool is therefore to be used with caution.
+Enter the required data for the part you would like to view.
+Item: Item number which you want to view the details.
+Site: The site where this inventory is manufactured or stored.
+Start Date: Specifies the first date to appear on this report or inquiry.
+End Date: Last date to consider or to appear on this report or inquiry.
+Bucket: (The default is [W]eek)
+Indicates the length of each column period. Information is displayed in columns with one column per time period. Each period summarizes activity for one or more [D]ay, [W]eek, [M]onth, or GL calendar [P]eriod. 
+All activity prior to the start date of the report is summarized and printed in the first column under the label "Past".
+#: (The default is 1) The number of time periods (days, weeks, months, or periods) to include in each column.
+
+Press enter and you will see the current data based on this input.
+If more than one PO is available for the selected item them a list will open and you will need to select the required PO.
+
+At the top of the screen you see the general settings and information
+
+
+At the bottom the requirements, order quantities and projected quantity on hand.
+Press Ctrl A and a new window will open
+
+Press F4 to exit the program.
+If you want to change the quantities for a specific date enter the date, quantity and Type/Interval (F for firmed or P for planned).
+Press enter and the quantity will be updated.
+To change a further quantity or exit press Ctrl A and repeat above.
+If changes have been made make sure you send these to suppliers, otherwise you will be working with data in your system that your suppliers do not have and therefore will not ship.
+
+MRP Summary Inquiry 23.13
+For one part at a time.
+This menu provides an overview of requirements for one part number.
+Item: Item number which you want to view the details.
+Site: The site where this inventory is manufactured or stored.
+Start Date: Specifies the first date to appear on this report or inquiry.
+End Date: Last date to consider or to appear on this report or inquiry.
+Column Type: (The default is [W]eek)
+Indicates the length of each column period. Information is displayed in columns with one column per time period. Each period summarizes activity for one or more [D]ay, [W]eek, [M]onth, or GL calendar [P]eriod.
+All activity prior to the start date of the report is summarized and printed in the first column under the label "Past".
+Per Column: (The default is 1) The number of time periods (days, weeks, months, or periods) to include in each column.
+Columns: The number of columns to be displayed.
+
+You can see the following data displayed:
+Gross Reqs:		Total Requirements for this day.
+Sched Receipts:		All the FIRM Orders
+Projected QOH:		System Calculated QOH
+Plan Ords Due:		System Calculated Orders required/due
+Plan Ords Rel:		System Calculated Orders to be released
+MRP Detail Inquiry 23.16
+This inquiry shows the details of requirements for a particular component or FG including the origins of the requirements. 
+
+Using output 'page' a report is generated in QAD:
+
+In a plant using a CBR (flat BOM), but also for FGs in plants with a conventional BOM the S/O will be shown for each requirement.
+Entering a name in output will mean a file is created with this information which can be transferred using and FTP tool (such as WINSCP) and opened in Excel.
+MRP Detail Report 23.17
+This program is similar to 23.16 with slightly more details and several items can be exported at once.
+Enter the details you require and click Next.
+
+Using output 'page' a report is generated in QAD:
+
+In a plant using a CBR (flat BOM), but also for FGs in plants with a conventional BOM the S/O will be shown for each requirement.
+Entering a name in output will mean a file is created with this information which can be transferred using and FTP tool (such as WINSCP) and opened in Excel.
+*MRP Export 23.18
+This program is used to export requirement data for a specific supplier, as is required for the FTL tool (see FTL instruction documents on Share Point) but can also be used to export data for a whole site.
+Enter the program, leave supplier empty and press enter.
+
+Enter the site or buyer data as required
+
+The file will be called mrp-ALLSUPPLIER.csv and will be available in your plant's home directory (ask IT if you don't know where to find that):
+
+Transfer the file and open it in Excel, it should look something like this:
+
+You can use this data to track requirements and coverage over the coming period.
+Transportation Order Management
+
+*PUS Order Creation/*Full Truck Load 12.10
+This program can be used together with 12.11 to create an upload file for INET to order the transport for LTL and Groupage shipments.
+For this program to function packaging data must be set up correctly for all items in 13.14.4 and 13.14.7. See the Packaging Setup instruction for details.
+Certain setups are also necessary in generalized codes for the creation of IDs and the set up of means of transport. Should you receive error messages relating to this contact IT.
+This program works best in Terminal mode. Change this be right clicking on the program and selecting properties.
+
+Under Program change from Desktop to Terminal.
+
+You can the open the program as usual. This setting will be saved and (unless you change it back) the program will automatically open in Terminal mode.
+
+To create an INET load file start by entering the Site and Supplier number.
+Leave the Id field empty and click Next to create an ID automatically.
+
+
+To create an Id number press Enter / F1. You will be asked if you are adding a new record, say you will be asked if you are adding a new record, say Yes.
+
+An Id number will then be created.
+Enter the collection and delivery dates and times that should be included in the INET file. You must also mention the means of transport.
+
+
+Press enter / F1. If comments is left as yes a Remarks window will open where remarks can be entered.
+
+Next you will need to select the type of data you want to see. 
+Transport for an ASN already in the system: 	ASN/REC
+Manual qty entry: 				MAN
+Quantities and dates based on the schedule: 	SCHD
+Import file - not currently used: 		IMP
+Typically you will use SCHD.
+Choose between discr and net, typically you will want to order for the net quantities.
+
+
+The system will then show you the dates for which scheduled orders are available in the system. Use the arrow keys ?? to scroll up and down 
+
+Press enter and enter again to select the shipment. You will see the quantities on the right of the screen and an X will appear next to the selected date. You can select more than one (above, for example, there are 2 POs for one supplier, so the qtys for both POs can be selected).
+
+If you select a date by mistake reenter using enter and then exit using F4. The X will disappear.
+Once all dates have been selected press F4. You will be asked to confirm the shipment dates and times.
+
+Change if required and exit using F4.
+You will return to this screen 
+Press F4 again.
+
+Now you will be shown all quantities to be shipped
+
+Confirm if information is correct. You will enter the list of parts. If you need to change the data press enter and you will access the part data at the bottom of the screen. 
+Change as required and confirm.
+Press F4.
+
+Press enter to confirm information is correct.
+
+Press enter to load truck.
+
+Proceed to the next point Export PUS (csv) 12.11 to complete the process.
+
+
+
+
+
+
+*Export PUS (csv) 12.11
+To export the PUS created in 12.10 (see above) enter the relevant data in the required fields:
+
+Outbound dir: The outbound directory for your facility should automatically be displayed here. If not talk to your IT team/help desk.
+Once exported you can find the file in that directory and transfer it onto your PC using WINSCP or similar.
+
+The file will contain the data from the shipment you entered.
+
+
+Upload into INET according to your standard process.
+
+QAD G2 TRAINING DOCUMENTAlerts / Materials Management ToolsPage 21 of 21
+
+

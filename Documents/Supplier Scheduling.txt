@@ -1,0 +1,169 @@
+
+
+
+
+
+Supplier Scheduling
+QAD EE 2016
+
+
+
+Contents
+Objective	3
+Schedule Update from MRP 5.5.3.1	3
+Updating Supplier Schedules with FIRM days	4
+Schedule Inquiry 5.5.3.4	5
+Schedule Maintenance 5.5.3.3	7
+Supplier Shipping Schedule Export 35.4.8	8
+Schedule Export Audit Report 35.4.6.4	9
+Multiple Part Release Print 5.5.3.10	9
+Expeditors Workbench 3.6.24.1	11
+Using the FTL Excel Tool to order Full Truck Loads	14
+Days of Supply Report 3.6.24.2	15
+Cum Received Reset to Zero 5.5.5.14	17
+Cumulative Received Maintenance 5.5.5.13	17
+
+
+
+
+
+Objective
+
+The objective of this document is to explain the process of supplier scheduling including sending via EDI and reports to view and change supplier scheduling data. 
+Schedule Update from MRP 5.5.3.1
+
+
+
+Schedule Update from MRP creates a new Supplier Schedule Release. 
+It finds all Planned Orders for the items & Schedules quantities and dates using Scheduled Order parameters (5.5.3.13). The releases from the last Schedule Update always remains active, therefore, after EVERY MRP run, you have to do a "Schedule Update" to update the supplier releases BEFORE you export the schedules to the suppliers.
+Like the Customer Schedule Update, the Supplier Schedule Update can be done for a certain selection criteria, depending on user preference.
+
+The "UPDATE" field should be selected.
+If not, data will not be updated, the system will simply display what would be updated.
+If the detail option is selected the system will provide details of the calculation that took place. Here is some of the key calculation data shown:
+
+WO-lot: This is the Work Orde ID created.
+WO-qty: This is the qty for this Work Order.
+Due: When these parts are due at Adient.
+Transp LT Adj Date: Transport Lead-Time, Order is brought forward according to the days setup. 
+Safety LT Adj Date: Safety Time Lead-Time, Order is brought forward according to the days setup.
+Ship/Dlvy Adj Date: Order day is adjusted according to the Ship Delivery Pattern
+Calendar LT Adj Date: If there is a holiday in the Calendar, order is brought forward.
+Alloc%: If you have an allocation percentage setup, it will be displayed here.
+Qty Ordered: The final order qty, based on your allocation percentage.
+
+
+Requirements are assigned to specific SAs based on the settings in 5.5.1.17. If there is a change in SA the dates must be correct in this menu. In exceptional cases demand can be divided between two SAs.
+Updating Supplier Schedules with FIRM days
+
+When performing the Supplier Schedule Update using FIRM days the option Working FIRM days should be selected in 5.5.3.1. This will allow the system to re-plan the FIRM PERIOD during this MRP process. If this is set to Calendar (the automatic setting) the system refers to the Supplier Calendar Setup in Calendar Maintenance, meaning orders in the Firm Days Period are not re-planned by MRP.
+
+Schedule Inquiry 5.5.3.4
+
+When performing the Supplier Schedule Inquiry, the details should match that of the ones created in the Supplier Schedule Update above.
+To view the details for a particular part, just type in the item number and use you cursor keys to scroll up/down, this should bring up all the details for the item (this is faster than typing it in).
+
+
+
+
+
+
+Schedule Maintenance 5.5.3.3
+
+Here the created Supplier Schedule can be edited if required or a new one created manually. 
+In Schedule Maintenance you can add/delete/edit any requirements as desired.
+Select the Item & PO, then at Release ID, click enter and the current Release ID will appear. 
+If a NEW Release ID is entered, the system will ask if data should be copied from the existing schedule;
+
+Yes - Details will be copied and you can just edit them.
+No - You have to manually enter all the details.
+
+This newly created Schedule will remain active until you create another Supplier Schedule Update.
+
+
+Press enter
+
+Press enter After making changes the adjusted schedule is visible in "Schedule Inquiry" 5.5.3.4.
+Supplier Shipping Schedule Export 35.4.8
+
+This menu is used for sending EDI to suppliers
+
+Automatic notification can be set up for emails to be sent informing of EDIs sent or just for errors in EDI sending.
+Schedule Export Audit Report 35.4.6.4
+This report can be used to verify which schedules have been sent via EDI
+
+A report will be created showing exported data
+
+Multiple Part Release Print 5.5.3.10
+
+As the other screens above, similarly the Supplier Schedule Print can be done for a certain selection criteria, depending on user preference.
+Supplier:		This is the supplier the purchase order is sent to. 
+Purchase Order:	The Adient purchase order for this line item record.
+Item Number:		The part number you want to print out for this order (for all parts leave blank).
+Site:			The Site for this part.
+As of Date:		The first date to be displayed in the schedule.
+Include Saturdays:	If not selected, Schedule Print Out will only show demands running from Mon-Fri. Any requirement for Saturday will not be shown.
+Print Zero Schedules:	All parts showing a demand of zero will not be printed on the report.
+
+
+
+Expeditors Workbench 3.6.24.1
+These programs should be viewed in Terminal mode to ensure proper functioning.
+To do this right click on the name of the program under applications and select properties. A window will appear, select program at the top and then open with Terminal
+
+This program can be used to view and edit order data per part.
+Caution: This is not a report program but edits the order data that will be sent to suppliers.
+Select the relevant item number, site and start date and schedule type 4 and daily buckets. 
+By clicking enter the open POs for this item will appear as well as the current release for that PO. Select the correct data by using the cursor to move up and down and pressing enter next to the required PO. An Underscore will then appear next to that PO. Press F1.
+
+The relevant data will then appear at the top of the screen for the part and below the current order data.
+
+By clicking Control A a new pop up window will open to edit the data.
+
+Enter the date for which the data should be changed. It will display the current order quantity and whether this is a Firm or Planned quantity. This quantity can be changed, updating the Supplier Schedule, as in 5.5.3.3. Confirm using enter or use F4 to exit.
+When corrections have been made, to exit the program press Ctrl+A and then F4.
+
+Using the FTL Excel Tool to order Full Truck Loads
+
+See the separate instructions for FTL to view all necessary steps.
+Here are the points in QAD for the FTL tool.
+Export the data per supplier using 23.18
+
+Upload 93.4.6 is used to import data from your home folder once created in the external Excel tool.
+
+Then 23.3 and 5.5.3.1 should be used to update data and update should be verified prior to sending to supplier.
+
+Days of Supply Report 3.6.24.2
+This report can be used to show coverage of parts.
+Use various criteria to limit the search:
+Buyer			Only show data for a specific buyer
+1st Loc, 2nd Loc: 	If these fields are left empty the system will calculate based on quantities on all available locations. If the search should be limited to specific locations one or two locations can be entered here.
+Print to File: 	Report exports a file which can be opened in Excel. Choose a name for the file under File name.
+Report Daily: 	the automatic setting is that supply is shown in weeks. Select this box for daily data to be displayed.
+Show out of range: 	the automatic setting is that only parts with less than the required number of days stock are shown. If the report should show all parts meeting the other criteria regardless of stock levels then Show out of range should be selected.
+WOS Calc. type: 	This is a key part of this report. There are 3 possible settings:
+1: Only MRP	This means no deliveries will be taken into account in calculations, only the qtys currently available in the system
+2: Add Schedules to MRP	This means scheduled delivery quantities will be taken into account in the daily stock quantities
+3: Add ASNs to MRP	ASN available in the system will be taken into account for calculations but no other planned qtys. Be careful - this relies on the delivery dates in the ASNs
+
+
+
+The report is created and can be opened in Excel.
+For each part 4 lines are shown showing requirements and stock quantities:
+
+
+Cum Received Reset to Zero 5.5.5.14
+
+At the beginning of each year it is usual to reset the cums with suppliers.
+This can be performed for a specific supplier, site etc.
+Enter the appropriate data. Under output enter a file name to create a file showing the old data. This can be exported using the WIN SCP tool.
+
+Cumulative Received Maintenance 5.5.5.13
+If you discover a discrepancy between your cums and your suppliers cums there should be an explanation relating to shipments and receipts. Typically RTV bookings have not been taken into account by suppliers or the in transit material overlooked. If you cannot find the issue and really need to adjust the cumulative received quantities, this menu can be used.
+Adjustments are made part be part. Enter the data as required and confirm.
+
+
+
+SCM QAD training documentSupplier Scheduling Page 16 of 16
+
+

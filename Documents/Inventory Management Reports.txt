@@ -1,0 +1,80 @@
+
+
+
+
+G2 EE
+Inventory Management Reports
+
+
+
+
+
+
+QAD EE Training Document
+Inventory Management Reports
+
+
+
+
+
+
+
+
+Table of Contents
+Objective	3
+*Inventory Valuation as of Date 3.6.15	3
+Inventory Detail by Location 3.6.6	4
+*Inventory Valuation as of by location 3.6.16	4
+Inventory Detail by Item Browse 75.7.2.12	5
+*Inventory Detail Browse 1.15.40.12	5
+*Inventory Detail Browse by Item 3.1.14	6
+Inventory Valuation as of Date 3.6.39	6
+
+
+
+
+
+Objective
+Purpose of this document is to explain the various Inventory management Reports that are available and their functions
+*Inventory Valuation as of Date 3.6.15
+Not to be confused with the report 3.6.39 which has the same name.
+This report displays the total value of all inventory for each part number. This report can typically be sued at month end to see the exact quantities that were available the last day of the month.
+
+Certain criteria can be selected to only see certain data (such as not to include non-nettable inventory).
+
+
+The report created is divided up based on product lines
+
+
+To export to Excel, enter another name instead of page and the file will be available for export in your home folder under that name, from where it can be transferred using the WIN SCP tool (or similar FTP tool installed by local IT) and then opened in Excel.
+Inventory Detail by Location 3.6.6
+This report can be used to gain an overview of material in a specific location. In AS, the QAD warehousing system which replaced Jessy form version 9, each shelf in the warehouse is a unique location, there is therefore no easy way to get an overview of all parts in the warehouse location. For all other locations this report can be used:
+
+
+Enter a name in output and a file will be created in your home directory from where it can be transferred using the WIN SCP tool (or similar FTP tool installed by local IT) and then opened in Excel.
+*Inventory Valuation as of by location 3.6.16
+This inventory report shows cost data for parts per location. Use the Output to Text File feature to export a .txt file which can then be opened in Excel. You can find this file in the FTP folder in WinSCP (or similar tool) dedicated to your plant. 
+
+Inventory Detail by Item Browse 75.7.2.12
+This browse contains basic inventory information about parts. See the UI Training document to see how you can customize this browse to your specific needs.
+
+
+*Inventory Detail Browse 1.15.40.12
+This browse is similar to 75.7.2.12 with slightly different data. See which browse better meets your requirements. See the UI Training document to see how you can customize this browse to your specific needs.
+
+
+
+*Inventory Detail Browse by Item 3.1.14
+This browse is similar to 75.7.2.12 with slightly different data. See which browse better meets your requirements. See the UI Training document to see how you can customize this browse to your specific needs.
+
+
+
+Inventory Valuation as of Date 3.6.39
+Not to be confused with the report 3.6.15 which has the same name.
+This report can be used to view stock levels for a specific date.
+Various other parameters can be used to limit the data according to your needs. There is however no option for selecting a specific time for the data, only date.
+
+
+QAD G2 TRAINING DOCUMENTInventory Management ReportsPage 2 of 7
+
+

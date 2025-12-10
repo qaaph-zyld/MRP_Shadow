@@ -1,0 +1,196 @@
+
+
+
+
+G2 EE
+Customer Demand Management
+
+
+
+
+
+
+QAD EE Training Document
+Customer Demand Management
+
+
+
+
+
+
+
+
+Table of Contents
+Objective	3
+Customer Planning Schedule (Long Term) 7.5.1	3
+Customer Planning Schedule (Short Term) 7.5.2	5
+Required Shipping Schedule Calculation 7.5.5	5
+Update Prior Cum Required (optional) 7.5.21.1	5
+Cumulative Shipped Maintenance 7.5.16	6
+Cum Shipped Reset 7.5.18	7
+Schedule change Flag Reset (optional) 7.5.21.4	8
+Required Ship Schedule Update 7.5.5	9
+Required Ship Schedule Maintenance 7.5.3	12
+Forecast Maintenance 22.1	12
+View Customer Scheduled Orders (Browse)	16
+
+
+
+
+
+Objective
+Purpose of this document is to explain various steps to be followed for managing customer demand
+Customer Planning Schedule (Long Term) 7.5.1
+The Customer Planning Schedule shows long term demand from the customer.
+Initially the customer Ship-To, Customer Item and Adient Item and should be selected, then click next.
+
+A section will appear where the ship from location can be entered. It will also suggest the open SO line for this part:
+
+By clicking next the next screen will be displayed
+
+Here further details of the SO are shown as well as the release number of any currently active order data.
+By clicking next the field Release ID becomes active, using the search function available, releases can be viewed or a new one can be created by entering a new ID
+
+In the next window the cum start date must be entered if a new release is being created.
+
+To delete this release click delete and confirm.
+If the comments box is checked then comments can be entered in the next sections. If it is unchecked the next step will be customer receipts, here previous deliveries to the customer will be shown or can be entered manually if required.
+
+By clicking Back the user can enter Schedule Detail Data
+
+Here requirements can be entered into the customer demands
+User can add a schedule for another date and its quantity. 
+Int stands for interval, D = daily, W = weekly, M = Monthly. This data may be overwritten if data entered here do not match the data in 5.5.1.13 (too many daily quantities, for example). Under Q F = firm or P = planned can be entered.
+Customer Planning Schedule (Short Term) 7.5.2
+
+The Customer Shipping Schedule functions in much the same way as the Customer Planning Schedule. The data is typically more precise and demand is received for the short term.
+Required Shipping Schedule Calculation 7.5.5
+
+The RSS identifies what needs to be shipped, on what dates, and by what time for a particular customer and sequenced scheduled order.
+Basically the RSS has two purposes 
+• It supplies MRP with the dates, times, and quantities of the customer's demands 
+• Provides the information used to instruct the shipping dock what to ship 
+User can create a new version of the RSS using one of the followings 
+• Required Ship Schedule Update (7.5.5) 
+• Selective Req Ship Sched Update (7.5.6)
+• Required Ship Sched Maintenance (7.5.3)
+A Notification of new schedule from EDI import may be received.
+
+Update Prior Cum Required (optional) 7.5.21.1
+
+Once it is received, user can, optionally check/update the prior cumulative required quantity. This means that all customer demands from today are assumed to be net demands. Possible overshipments from previous days are not taken into account. This can avoid over / under orders due to differences in cumulative quantities
+Enter the data for the Ship-to and Order for which the cums should be updated. 
+
+Cumulative Shipped Maintenance 7.5.16
+
+If cumulative quantities are maintained for a customer it will sometimes be necessary to adjust these due to discrepancies.
+The relevant item must be selected:
+
+And the corresponding order data:
+
+The can then be marked if this is an adjustment A or a reset R, remarks can be entered and then the corrected current cum shipped and the cum shipped for the previous day. In the case of a reset the cum shipped quantity will automatically be 0.
+
+Cum Shipped Reset 7.5.18
+
+For JIT plants working with customer cums it will typically be necessary to reset the cums at regular intervals (at least once a year) based on the customer requirements.
+
+This will typically be performed for one Sales Order. A remark can be entered which will be visible in transaction history (e.g. 'annual cum reset').
+Schedule change Flag Reset (optional) 7.5.21.4
+
+Flag update means that the system recognizes parts for which demand data has changed. This can be used in some MRP processes so that only those parts with changed data are (re)processed.
+
+
+
+Required Ship Schedule Update 7.5.5
+
+The Required Ship Schedule created by running 7.5.5 is a combination of Customer Long term and Short term demand. Scheduled Order line is setup with a mandatory Netting logic value of 1, 2, 3, 4 or 5 in 7.3.13. 
+* 1 Use the shipping schedule only (can be seen in 7.5.2).
+* 2 Use the planning schedule only (can be seen in 7.5.1).
+* 3 Replace beginning of the planning schedule with the shipping schedule (replace logic).
+* 4 Replace beginning of the planning schedule with the shipping schedule, then adjust the last quantity in each week of the shipping schedule data upward so the cumulative of the shipping schedule requirements is not less than the cumulative of the planning schedule requirements (consume logic).
+* 5 Replace the beginning of the planning schedule with the shipping schedule. Determine the excess planning quantity in the last overlap week (the last week with both planning and shipping schedules) and spread the excess planning quantity over the open work days in the last overlap week.
+Use Required Ship Schedule Update to generate a new RSS. The RSS:
+• Turns customer demand from the schedule release into dates, times, and quantities that the user can then use for planning and production.
+• Provides information used to supply MRP allowing it to plan future replenishment orders.
+• Instructs the shipping dock what needs to be shipped.
+• Provides information used to generate the picklist/pre-shipper. 
+Note It is good to set Update to 'No' when first running this process. This gives user the ability to review the new schedule release before actually creating it. 
+Process Screen
+
+Once confirmed on the next page there is a list of items with the relevant data.
+
+The ship schedule and plan schedule data are then combined to create RSS quantities
+
+
+This detailed view is required for analysis only. For daily use, use the summary option and remember to update the system.
+
+Required Ship Schedule Maintenance 7.5.3
+
+The result of running 7.5.5 is the creation of a Required Ship Schedule (Type 3) that can be modified via 7.5.3 Required Ship Schedule Maintenance. 
+The system will propose the release created by running 7.5.5 or, as with 7.5.1 an 2 a new schedule can be entered manually. Click on the magnifying glass in the Release ID field to see available existing releases. 
+
+Updating the RSS in 7.5.3 functions in much the same way as the Customer Planning and Shipping Schedules.
+Once the RSS data has been adjusted the MRP can be run to calculate supplier quantities.
+Forecast Maintenance 22.1
+
+This process explains  
+
+1)  How to create forecast quantities
+2)  How to consume the forecast against actual demand in customer schedule
+3)  How MRP calculates the total customer demand from forecast and actual
+
+Forecast Maintenance is used to record the number of units of a particular item that is expected to be shipped from a particular site in a week when no data is available from the customer. 
+Forecast is a demand to MRP. MRP will plan for production to fulfill this demand.
+The forecast can then be consumed by firm demand, depending on system settings. Firm demand can be created through Discrete Sales Order or Customer Schedule Release.
+
+Steps in 21.1: 
+1) Item Number: Enter the item number that has a forecast demand.
+2) Site: Enter site code
+3) Year: Enter the year the forecast applies to
+
+4) Click Next. 
+5) Enter forecast of that item for the required dates.
+
+6) Enter the forecast quantity for a particular week. Continue entering weekly forecasts as needed.  
+7) Click Enter or click Next to complete the screen.
+The screen always shows the calendar year entered at the top of the screen. If there are requirements over two years (e.g. Dec and Jan) then the next year must be entered at the top of the screen.
+
+Forecast Report
+Forecast Report 22.28 is used to ensure that forecasts entered into forecast maintenance have been entered correctly. 
+
+Following is a list of important Fields.
+Item Number: Enter the individual number that you wish to check
+Site: Enter site code
+Product Line: Leave blank
+Date: Enter the date range you wish the report to look across.  
+Summary/Detail: Enter Summary to see total forecast quantity and Detail to see how that forecast summary is split across the date rage. 
+Forecasted Only: Select Yes.
+Click Run.
+Summary:
+
+Detail:
+
+
+Under 7.3.13 for the current customer Sales Order there is a consume forecast box for each part:
+
+If this box is checked other orders/sales will consume the forecast quantities. If it is not checked then the forecast quantities will remain in addition to other orders.
+The quantities will be visible from the 23.2/3 step of the MRP run.
+Orders consume forecast in the week they are due. If there are unconsumed forecasts in a week prior to or after the order week then these can be consumed based on the Sales Order Control settings. Central IT has access to these settings. The range is set in the Consume Forward and Consume Back fields in Sales Order Control.
+View Customer Scheduled Orders (Browse)
+
+There is a new tool in QAD G2 EE called 
+
+This can be used to view the current Customer Scheduled Order data 
+Using the filter a particular part / order etc. can be selected.
+At the top overall data can be seen. Below there are 5 tabs. By clicking on these specific data can be viewed, here the Plan Schedule Data.
+
+
+QAD G2 TRAINING DOCUMENTCustomer Demand ManagementPage 1 of 16
+
+
+
+
+
+
+
+
